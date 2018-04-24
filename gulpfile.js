@@ -1,10 +1,12 @@
 var gulp = require('gulp');
+var zip = require('gulp-zip');
 var sass = require('gulp-sass');
 var header = require('gulp-header');
 var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var pkg = require('./package.json');
 var browserSync = require('browser-sync').create();
+var pjson = require('./package.json');
 
 // Copy third party libraries from /node_modules into /vendor
 gulp.task('vendor', function() {
@@ -115,4 +117,11 @@ gulp.task('dist', ['default'], function() {
         './vendor/**'
     ])
         .pipe(gulp.dest('./dist/vendor/'));
+});
+
+// release zip
+gulp.task ('release', ['dist'], function () {
+    gulp.src('dist/*')
+        .pipe(zip(pjson.name + '-' + pjson.version + '.zip'))
+        .pipe(gulp.dest('releases'))
 });
