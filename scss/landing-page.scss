@@ -1,5 +1,11 @@
-// Core variables and mixins
+
 @import "variables.scss";
+
+// Required
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Core variables and mixins
+
 @import "mixins.scss";
 // Global CSS
 @import "global.scss";
